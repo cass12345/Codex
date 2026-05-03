@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Tracker Dashboard</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Project Tracker</h1>
+    <p>Track current, potential, and archived projects with live dashboard stats.</p>
+  </header>
+
+  <main>
+    <section class="controls">
+      <form id="project-form">
+        <h2>Add Project</h2>
+        <div class="grid">
+          <label>Name <input required id="name" /></label>
+          <label>Owner <input required id="owner" /></label>
+          <label>Status
+            <select id="status">
+              <option value="current">Current</option>
+              <option value="potential">Potential</option>
+              <option value="archived">Archived</option>
+            </select>
+          </label>
+          <label>Progress (%) <input id="progress" type="number" min="0" max="100" value="0" /></label>
+          <label>Budget ($) <input id="budget" type="number" min="0" value="1000" /></label>
+          <label>Due date <input id="dueDate" type="date" /></label>
+        </div>
+        <button type="submit">Add Project</button>
+      </form>
+
+      <div class="filters">
+        <h2>Filters</h2>
+        <div class="filter-buttons" id="filter-buttons">
+          <button data-filter="all" class="active">All</button>
+          <button data-filter="current">Current</button>
+          <button data-filter="potential">Potential</button>
+          <button data-filter="archived">Archived</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="dashboard" id="dashboard">
+      <article class="card"><h3>Total Projects</h3><p id="totalCount">0</p></article>
+      <article class="card"><h3>Current</h3><p id="currentCount">0</p></article>
+      <article class="card"><h3>Potential</h3><p id="potentialCount">0</p></article>
+      <article class="card"><h3>Archived</h3><p id="archivedCount">0</p></article>
+      <article class="card"><h3>Average Progress</h3><p id="avgProgress">0%</p></article>
+      <article class="card"><h3>Total Budget</h3><p id="totalBudget">$0</p></article>
+    </section>
+
+    <section class="charts">
+      <article>
+        <h2>Status Distribution</h2>
+        <canvas id="statusChart" width="420" height="220"></canvas>
+      </article>
+      <article>
+        <h2>Budget by Status</h2>
+        <canvas id="budgetChart" width="420" height="220"></canvas>
+      </article>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th><th>Owner</th><th>Status</th><th>Progress</th><th>Budget</th><th>Due Date</th><th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="projectRows"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
